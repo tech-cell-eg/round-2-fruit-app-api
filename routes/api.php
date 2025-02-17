@@ -8,5 +8,11 @@ Route::post('username', [\App\Http\Controllers\API\UserController::class, 'store
 
 Route::middleware('check.name')->group(function () {
    Route::get('meals', [MealController::class, 'index']);
+
+   Route::post('basket', [\App\Http\Controllers\API\BasketController::class, 'addMeal']);
+
+   Route::delete('basket', [\App\Http\Controllers\API\BasketController::class, 'removeMeal']);
+
 });
+
 

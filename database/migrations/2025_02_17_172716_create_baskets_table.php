@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('baskets', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('meal_id')->constrained('meals')->onDelete('cascade');
-            $table->foreignId('payment_id')->constrained('payment')->onDelete('cascade');
+            $table->unique(['user_id', 'meal_id']);
             $table->unsignedInteger('quantity');
             $table->float('total_price');
             $table->timestamps();
