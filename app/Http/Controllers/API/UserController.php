@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UsernameRequest;
 use App\Models\User;
 use App\Traits\ApiResponse;
@@ -25,6 +26,18 @@ class UserController extends Controller
             );
         } catch (\Exception $exception) {
             Log::error("store username\n" . $exception->getMessage());
+            return $this->errorResponse('Something went wrong', 500);
+        }
+    }
+
+    public function updateInfo(UpdateUserRequest $request) {
+        try {
+            $user = User::where('name', $request->name)->first();
+            $data = $request->validated();
+            $user->update($data);
+            return $this->successResponse(['user' => $user], 'Data has been updated');
+        } catch (\Exception $exception) {
+            Log::error("update info\n" . $exception->getMessage());
             return $this->errorResponse('Something went wrong', 500);
         }
     }

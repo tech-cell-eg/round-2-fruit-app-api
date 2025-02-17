@@ -13,6 +13,6 @@ Route::middleware('check.name')->group(function () {
 
    Route::delete('basket', [\App\Http\Controllers\API\BasketController::class, 'removeMeal']);
 
+   Route::put('info', [\App\Http\Controllers\API\UserController::class, 'updateInfo']);
+
 });
-
-
