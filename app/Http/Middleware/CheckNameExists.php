@@ -20,7 +20,7 @@ class CheckNameExists
      */
     public function handle(Request $request, Closure $next): Response
     {
-
+//        dd($request->all());
         if (!$request->has('name')) {
             return $this->errorResponse('Name is required', Response::HTTP_BAD_REQUEST);
         }
