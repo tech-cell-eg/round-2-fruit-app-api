@@ -12,7 +12,6 @@ class Basket extends Model
         'user_id',
         'meal_id',
         'quantity',
-        'payment_id',
         'total_price'
     ];
 
