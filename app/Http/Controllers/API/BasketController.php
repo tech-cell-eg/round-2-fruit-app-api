@@ -17,7 +17,7 @@ class BasketController extends Controller
 {
     use ApiResponse;
 
-    public function addMeal(AddMealToBasketRequest $request) {
+    public function store(AddMealToBasketRequest $request) {
         try {
             $user = User::where('name', $request->name)->first();
             $data = $request->validated();

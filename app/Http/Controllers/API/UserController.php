@@ -15,7 +15,7 @@ class UserController extends Controller
 
     use ApiResponse;
 
-    public function storeUsername(UsernameRequest $request) {
+    public function store(UsernameRequest $request) {
         try {
             $name = $request->validated('name');
             User::create(['name' => $name]);
@@ -30,7 +30,7 @@ class UserController extends Controller
         }
     }
 
-    public function updateInfo(UpdateUserRequest $request) {
+    public function update(UpdateUserRequest $request) {
         try {
             $user = User::where('name', $request->name)->first();
             $data = $request->validated();

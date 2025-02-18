@@ -3,16 +3,18 @@
 use App\Http\Controllers\API\MealController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\BasketController;
+use App\Http\Controllers\API\UserController;
 
-Route::post('username', [\App\Http\Controllers\API\UserController::class, 'storeUsername']);
+Route::post('username', [UserController::class, 'store']);
 
 Route::middleware('check.name')->group(function () {
    Route::get('meals', [MealController::class, 'index']);
 
-   Route::post('basket', [\App\Http\Controllers\API\BasketController::class, 'addMeal']);
+   Route::post('basket', [BasketController::class, 'store']);
 
-   Route::delete('basket', [\App\Http\Controllers\API\BasketController::class, 'removeMeal']);
+   Route::delete('basket', [BasketController::class, 'removeMeal']);
 
-   Route::put('info', [\App\Http\Controllers\API\UserController::class, 'updateInfo']);
+   Route::put('info', [UserController::class, 'update']);
 
 });
