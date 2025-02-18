@@ -47,9 +47,18 @@ class User extends Authenticatable
         ];
     }
 
+    Static function getUser($username)
+    {
+        return self::where('name', $username)->first();
+    }
+
     // relations
     public function baskets(): HasMany {
         return $this->hasMany(Basket::class);
+    }
+
+    public function payments(): HasMany {
+        return $this->hasMany(Payment::class);
     }
 
 

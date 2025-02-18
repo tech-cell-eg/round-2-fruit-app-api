@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('payment', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedInteger('transaction_id');
             $table->unsignedInteger('amount');
             $table->string('status')->default(\App\Enum\PaymentStatus::Pending);

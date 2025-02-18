@@ -19,7 +19,7 @@ class BasketController extends Controller
 
     public function store(AddMealToBasketRequest $request) {
         try {
-            $user = User::where('name', $request->name)->first();
+            $user = User::getUser($request->name);
             $data = $request->validated();
             $data['user_id'] = $user->id;
             $meal = Meal::findOrFail($data['meal_id']);
@@ -37,7 +37,7 @@ class BasketController extends Controller
     public function removeMeal(RemoveMealFromBasketRequest $request) {
         try {
             $data = $request->validated();
-            $user = User::where('name', $request->name)->first();
+            $user = User::getUser($request->name);
             $meal = Basket::where('meal_id', $data['meal_id'])
                 ->where('user_id', $user->id)->delete();
             if (!$meal) {

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UsernameRequest;
 use App\Models\User;
 use App\Traits\ApiResponse;
+use App\Traits\GetUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -32,7 +33,7 @@ class UserController extends Controller
 
     public function update(UpdateUserRequest $request) {
         try {
-            $user = User::where('name', $request->name)->first();
+            $user = User::getUser($request->name);
             $data = $request->validated();
             $user->update($data);
             return $this->successResponse(['user' => $user], 'Data has been updated');

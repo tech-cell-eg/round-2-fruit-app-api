@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Meal extends Model
@@ -18,6 +19,11 @@ class Meal extends Model
     // relations
     public function baskets(): HasMany {
         return $this->hasMany(Basket::class);
+    }
+
+    public function payments(): BelongsToMany {
+        return $this->belongsToMany(Payment::class, 'meal_payment')
+            ->withPivot('amount', 'status');
     }
 
 }
