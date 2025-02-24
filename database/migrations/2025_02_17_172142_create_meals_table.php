@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('meals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('admins');
+            $table->foreignId('admin_id')->constrained('users', 'id');
             $table->string('title');
             $table->text('description');
             $table->float('price');
