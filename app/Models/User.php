@@ -64,5 +64,9 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
+    public function meals(): HasMany {
+        return $this->hasMany(Meal::class, 'admin_id');
+    }
+
 
 }

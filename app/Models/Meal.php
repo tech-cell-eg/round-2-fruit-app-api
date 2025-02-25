@@ -13,6 +13,7 @@ class Meal extends Model
     use HasFactory;
 
     protected $fillable = [
+        'admin_id',
         'title',
         'description',
         'price',
@@ -27,6 +28,10 @@ class Meal extends Model
     public function payments(): BelongsToMany {
         return $this->belongsToMany(Payment::class, 'meal_payment')
             ->withPivot('amount', 'status');
+    }
+
+    public function users(): BelongsToMany {
+        return $this->belongsToMany(User::class, 'admin_id');
     }
 
 }

@@ -218,6 +218,21 @@
         </div>
     </nav>
     <!-- End Navbar -->
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if(Session::has('success'))
+        <div class="row">
+            <p class="alert alert-info">{{ Session::get('success') }}</p>
+        </div>
+    @endif
     <div class="container-fluid py-4">
         @yield('content')
     </div>
