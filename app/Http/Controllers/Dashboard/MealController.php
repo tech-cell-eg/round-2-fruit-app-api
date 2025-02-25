@@ -18,9 +18,6 @@ class MealController extends Controller
     }
 
     public function store(AddMealRequest $request) {
-        if (!$request->hasFile('image')) {
-            return back()->with('error', 'Please upload an image');
-        }
         $data = array_diff_key($request->validated(), array_flip(['image', '_token']));
         $data['image_url'] = $request->file('image')->store('images', 'public');
         $data['admin_id'] = Auth::id();
