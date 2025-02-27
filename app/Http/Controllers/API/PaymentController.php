@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentRequest;
 use App\Models\Meal;
+use App\Models\Payment;
 use App\Models\User;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -13,6 +14,18 @@ use Illuminate\Support\Facades\Log;
 class PaymentController extends Controller
 {
     use ApiResponse;
+
+    public function index() {
+        $title = 'Payments';
+        $payments = Payment::all();
+        $data = $payments->map(function ($payment) {
+            $filteredPayment = collect($payment)->except(['user_id'])->toArray();
+            $filteredPayment['user_name'] = User::find($payment->user_id)->name ?? 'Unknown';
+            return $filteredPayment;
+        });
+//        dd($data);
+        return view('payments.index', compact('title', 'data'));
+    }
     public function store (PaymentRequest $request) {
         try {
             $user = User::getUser($request->name);
